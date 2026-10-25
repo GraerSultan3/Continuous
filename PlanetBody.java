@@ -2,11 +2,28 @@ public class PlanetBody
 {
     private Body surfaceBody;
     private Body atmosphereBody;
+    private Vector velocity;
 
-    public PlanetBody(double mass, double surfaceRadius, double atmosphereRadius, Vector position)
+    public PlanetBody(double mass, double surfaceRadius, double atmosphereRadius, Vector position, Vector velocity)
     {
-        surfaceBody = new Body(mass, surfaceRadius, position);
+        surfaceBody = new Body(mass, surfaceRadius, position, velocity);
         atmosphereBody = new Body(0, atmosphereRadius);
+        this.velocity = velocity;
+    }
+
+    public Vector getPosition()
+    {
+        return surfaceBody.getPosition();
+    }
+
+    public double getMass()
+    {
+        return surfaceBody.getMass();
+    }
+
+    public Body getSurfaceBody()
+    {
+        return surfaceBody;
     }
 
     public Vector calculateGravity(Body otherGoober)

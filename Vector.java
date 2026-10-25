@@ -1,8 +1,10 @@
 public class Vector
 {
+    // Attributes
     private double magnitude;
     private double[] values;
 
+    // Static meths
     public static Vector addVectors(Vector v1, Vector v2)
     {
         double[] newValues = new double[Math.max(v1.getSize(), v2.getSize())];
@@ -26,6 +28,7 @@ public class Vector
 
         return new Vector(newValues);
     }
+
 
     public static double getDotProduct(Vector v1, Vector v2)
     {
@@ -51,11 +54,27 @@ public class Vector
         return new Vector(values);
     }
 
+    public static Vector pow(Vector v1, double power)
+    {
+        double[] values = new double[v1.getSize()];
+        boolean isZero;
+
+        for (int i = 0; i < values.length; i++)
+        {
+            isZero = v1.getValue(i) != 0;
+            values[i] = (isZero) ? Math.pow(v1.getValue(i), power) : 0;
+        }
+
+        return new Vector(values);
+    }
+
     public static double getCrossProduct(Vector v1, Vector v2)
     {
         return (v1.getValue(0) * v2.getValue(1)) - (v1.getValue(1) * v2.getValue(0));
     }
 
+
+    // Constructors
     public Vector(double magnitude, double[] directions)
     {
         values = new double[directions.length];
@@ -65,7 +84,7 @@ public class Vector
             values[i] = magnitude * directions[i];
         }
 
-        magnitude = magnitude;
+        this.magnitude = magnitude;
     }
 
     public Vector(double[] values)
@@ -82,6 +101,19 @@ public class Vector
         magnitude = Math.sqrt(magnitude);
     }
 
+    public String toString()
+    {
+        String output = "";
+
+        for (int i = 0; i < values.length; i++)
+        {
+            output += values[i] + " ";
+        }
+
+        return output;
+    }
+
+    // Object meths
     public double getValue(int direction)
     {
         try
@@ -95,6 +127,11 @@ public class Vector
         {
             return 0.0;
         }
+    }
+
+    public double getMagnitude()
+    {
+        return magnitude;
     }
 
     public Vector getUnitVector()
